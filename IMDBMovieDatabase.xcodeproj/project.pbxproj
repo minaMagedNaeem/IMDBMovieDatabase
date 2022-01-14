@@ -14,6 +14,10 @@
 		5B3A5A712791744300781CDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B3A5A6F2791744300781CDC /* LaunchScreen.storyboard */; };
 		5B3A5A7C2791744300781CDC /* IMDBMovieDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3A5A7B2791744300781CDC /* IMDBMovieDatabaseTests.swift */; };
 		5B3A5A872791744300781CDC /* IMDBMovieDatabaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3A5A862791744300781CDC /* IMDBMovieDatabaseUITests.swift */; };
+		5BC03B7C27917B7E00A64268 /* ImdbAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03B7B27917B7E00A64268 /* ImdbAPI.swift */; };
+		5BC03B8127917BDA00A64268 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03B8027917BDA00A64268 /* Connectivity.swift */; };
+		5BC03B8627917BE800A64268 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03B8527917BE800A64268 /* NetworkError.swift */; };
+		5BC03B8C27917C1400A64268 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03B8B27917C1400A64268 /* Extensions.swift */; };
 		6A547D9CE0C35065E18183AD /* Pods_IMDBMovieDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD41EF7D87C822ABF8ADCE02 /* Pods_IMDBMovieDatabase.framework */; };
 		9452DE1382D02E81D71365A2 /* Pods_IMDBMovieDatabase_IMDBMovieDatabaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F2809DC593A0984411E7BE /* Pods_IMDBMovieDatabase_IMDBMovieDatabaseUITests.framework */; };
 		B4A6079B00B07384FFCE0E85 /* Pods_IMDBMovieDatabaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1CF8F6308BA8DA20751F29 /* Pods_IMDBMovieDatabaseTests.framework */; };
@@ -53,6 +57,10 @@
 		5B3A5A822791744300781CDC /* IMDBMovieDatabaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IMDBMovieDatabaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B3A5A862791744300781CDC /* IMDBMovieDatabaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMDBMovieDatabaseUITests.swift; sourceTree = "<group>"; };
 		5B3A5A882791744300781CDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5BC03B7B27917B7E00A64268 /* ImdbAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImdbAPI.swift; sourceTree = "<group>"; };
+		5BC03B8027917BDA00A64268 /* Connectivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
+		5BC03B8527917BE800A64268 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		5BC03B8B27917C1400A64268 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6CCDCD907D50509FF58DC6F2 /* Pods-IMDBMovieDatabase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMDBMovieDatabase.release.xcconfig"; path = "Target Support Files/Pods-IMDBMovieDatabase/Pods-IMDBMovieDatabase.release.xcconfig"; sourceTree = "<group>"; };
 		9E9CB4AADF59DF6128ACDEA0 /* Pods-IMDBMovieDatabase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMDBMovieDatabase.debug.xcconfig"; path = "Target Support Files/Pods-IMDBMovieDatabase/Pods-IMDBMovieDatabase.debug.xcconfig"; sourceTree = "<group>"; };
 		CE1CF8F6308BA8DA20751F29 /* Pods_IMDBMovieDatabaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMDBMovieDatabaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,12 +122,14 @@
 		5B3A5A632791743D00781CDC /* IMDBMovieDatabase */ = {
 			isa = PBXGroup;
 			children = (
-				5B3A5A642791743D00781CDC /* AppDelegate.swift */,
+				5BC03B8A27917BFD00A64268 /* Extensions */,
+				5BC03B7927917B2D00A64268 /* Common */,
+				5BC03B7827917AFC00A64268 /* Application */,
+				5BC03B7727917AEC00A64268 /* Config */,
 				5B3A5A682791743D00781CDC /* ViewController.swift */,
 				5B3A5A6A2791743D00781CDC /* Main.storyboard */,
 				5B3A5A6D2791744200781CDC /* Assets.xcassets */,
 				5B3A5A6F2791744300781CDC /* LaunchScreen.storyboard */,
-				5B3A5A722791744300781CDC /* Info.plist */,
 			);
 			path = IMDBMovieDatabase;
 			sourceTree = "<group>";
@@ -140,6 +150,48 @@
 				5B3A5A882791744300781CDC /* Info.plist */,
 			);
 			path = IMDBMovieDatabaseUITests;
+			sourceTree = "<group>";
+		};
+		5BC03B7727917AEC00A64268 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				5B3A5A722791744300781CDC /* Info.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		5BC03B7827917AFC00A64268 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				5B3A5A642791743D00781CDC /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		5BC03B7927917B2D00A64268 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5BC03B7A27917B6300A64268 /* NetworkLayer */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		5BC03B7A27917B6300A64268 /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				5BC03B8527917BE800A64268 /* NetworkError.swift */,
+				5BC03B8027917BDA00A64268 /* Connectivity.swift */,
+				5BC03B7B27917B7E00A64268 /* ImdbAPI.swift */,
+			);
+			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		5BC03B8A27917BFD00A64268 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5BC03B8B27917C1400A64268 /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9491A0523E5CFBC3A3987002 /* Frameworks */ = {
@@ -403,8 +455,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BC03B8127917BDA00A64268 /* Connectivity.swift in Sources */,
+				5BC03B8C27917C1400A64268 /* Extensions.swift in Sources */,
 				5B3A5A692791743D00781CDC /* ViewController.swift in Sources */,
+				5BC03B7C27917B7E00A64268 /* ImdbAPI.swift in Sources */,
 				5B3A5A652791743D00781CDC /* AppDelegate.swift in Sources */,
+				5BC03B8627917BE800A64268 /* NetworkError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
