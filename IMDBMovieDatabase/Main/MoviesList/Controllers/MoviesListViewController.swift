@@ -18,12 +18,19 @@ class MoviesListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        
         // Do any additional setup after loading the view.
     }
     
     private func setupNavbar() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.title = "Movies"
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(filterTapped))
+    }
+    
+    @objc func filterTapped(sender: UIBarButtonItem) {
+        // Function body goes here
     }
 }
 

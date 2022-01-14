@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="121" id="KGk-i7-Jjw" customClass="MovieTableViewCell" customModule="IMDBMovieDatabase" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="MovieTableViewCell" customModule="IMDBMovieDatabase" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -36,7 +36,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="pgX-bJ-tf3">
-                        <rect key="frame" x="80" y="13.5" width="232" height="53.5"/>
+                        <rect key="frame" x="80" y="8" width="232" height="53.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P22-bf-2Cr">
                                 <rect key="frame" x="0.0" y="0.0" width="232" height="20.5"/>
@@ -44,7 +44,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DescriptionDescriptionDescriptionDescriptionDescriptionDescription" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tT-rs-TV3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DescriptionDescriptionDescriptionDescriptionDescriptionDescription" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tT-rs-TV3">
                                 <rect key="frame" x="0.0" y="24.5" width="232" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" systemColor="systemGrayColor"/>
@@ -53,9 +53,10 @@
                         </subviews>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKp-ex-CqE">
-                        <rect key="frame" x="0.0" y="80" width="320" height="41"/>
+                        <rect key="frame" x="0.0" y="85" width="320" height="36"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="tintColor" systemColor="systemOrangeColor"/>
+                        <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
                         <state key="normal" title="Add to favourites" image="star.fill" catalog="system">
                             <color key="titleColor" systemColor="systemOrangeColor"/>
                         </state>
@@ -65,10 +66,11 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="lKp-ex-CqE" firstAttribute="top" secondItem="bgI-me-EOJ" secondAttribute="bottom" constant="8" id="8Ua-qS-XvO"/>
+                    <constraint firstItem="lKp-ex-CqE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="bgI-me-EOJ" secondAttribute="bottom" constant="8" id="8Ua-qS-XvO"/>
+                    <constraint firstItem="pgX-bJ-tf3" firstAttribute="top" secondItem="bgI-me-EOJ" secondAttribute="top" id="LSV-h6-dZL"/>
+                    <constraint firstItem="lKp-ex-CqE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pgX-bJ-tf3" secondAttribute="bottom" constant="8" id="SLW-7U-IBa"/>
                     <constraint firstAttribute="trailing" secondItem="pgX-bJ-tf3" secondAttribute="trailing" constant="8" id="akn-ri-0YS"/>
                     <constraint firstItem="pgX-bJ-tf3" firstAttribute="leading" secondItem="bgI-me-EOJ" secondAttribute="trailing" constant="8" id="eaH-5g-V0J"/>
-                    <constraint firstItem="pgX-bJ-tf3" firstAttribute="centerY" secondItem="bgI-me-EOJ" secondAttribute="centerY" id="f85-W5-0HB"/>
                     <constraint firstAttribute="trailing" secondItem="lKp-ex-CqE" secondAttribute="trailing" id="fxX-fY-gRy"/>
                     <constraint firstItem="bgI-me-EOJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="odd-dI-jyV"/>
                     <constraint firstItem="lKp-ex-CqE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="pwa-Ul-weQ"/>
