@@ -19,6 +19,11 @@
 		5B600A692791923400AD53DB /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B600A672791923400AD53DB /* MovieTableViewCell.swift */; };
 		5B600A6A2791923400AD53DB /* MovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B600A682791923400AD53DB /* MovieTableViewCell.xib */; };
 		5B600A6F2791A3A400AD53DB /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B600A6E2791A3A400AD53DB /* Reusable.swift */; };
+		5B600A772791CF4400AD53DB /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B600A762791CF4400AD53DB /* APIKey.swift */; };
+		5B600A7C2791D1AF00AD53DB /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B600A7B2791D1AF00AD53DB /* APIKeys.plist */; };
+		5B600A852791E63400AD53DB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B600A842791E63400AD53DB /* NetworkManager.swift */; };
+		5B600A8D2792150300AD53DB /* MoviesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B600A8C2792150300AD53DB /* MoviesListViewModel.swift */; };
+		5B600A922792186400AD53DB /* MoviesNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B600A912792186400AD53DB /* MoviesNetworkManager.swift */; };
 		5BC03B7C27917B7E00A64268 /* ImdbAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03B7B27917B7E00A64268 /* ImdbAPI.swift */; };
 		5BC03B8127917BDA00A64268 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03B8027917BDA00A64268 /* Connectivity.swift */; };
 		5BC03B8627917BE800A64268 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03B8527917BE800A64268 /* NetworkError.swift */; };
@@ -68,6 +73,11 @@
 		5B600A672791923400AD53DB /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		5B600A682791923400AD53DB /* MovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieTableViewCell.xib; sourceTree = "<group>"; };
 		5B600A6E2791A3A400AD53DB /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		5B600A762791CF4400AD53DB /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		5B600A7B2791D1AF00AD53DB /* APIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
+		5B600A842791E63400AD53DB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		5B600A8C2792150300AD53DB /* MoviesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewModel.swift; sourceTree = "<group>"; };
+		5B600A912792186400AD53DB /* MoviesNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesNetworkManager.swift; sourceTree = "<group>"; };
 		5BC03B7B27917B7E00A64268 /* ImdbAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImdbAPI.swift; sourceTree = "<group>"; };
 		5BC03B8027917BDA00A64268 /* Connectivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		5BC03B8527917BE800A64268 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -186,7 +196,7 @@
 		5B600A5B27918ACA00AD53DB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5B600A652791920D00AD53DB /* cell */,
+				5B600A682791923400AD53DB /* MovieTableViewCell.xib */,
 				5B600A5F27918B0A00AD53DB /* MoviesListViewController.xib */,
 			);
 			path = Views;
@@ -204,16 +214,18 @@
 		5B600A5D27918AE300AD53DB /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				5B600A8C2792150300AD53DB /* MoviesListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		5B600A652791920D00AD53DB /* cell */ = {
+		5B600A832791E62100AD53DB /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
-				5B600A682791923400AD53DB /* MovieTableViewCell.xib */,
+				5B600A842791E63400AD53DB /* NetworkManager.swift */,
+				5B600A912792186400AD53DB /* MoviesNetworkManager.swift */,
 			);
-			path = cell;
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 		5BC03B7727917AEC00A64268 /* Config */ = {
@@ -228,6 +240,8 @@
 			isa = PBXGroup;
 			children = (
 				5B3A5A642791743D00781CDC /* AppDelegate.swift */,
+				5B600A762791CF4400AD53DB /* APIKey.swift */,
+				5B600A7B2791D1AF00AD53DB /* APIKeys.plist */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -244,6 +258,7 @@
 		5BC03B7A27917B6300A64268 /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
+				5B600A832791E62100AD53DB /* NetworkManager */,
 				5BC03B8527917BE800A64268 /* NetworkError.swift */,
 				5BC03B8027917BDA00A64268 /* Connectivity.swift */,
 				5BC03B7B27917B7E00A64268 /* ImdbAPI.swift */,
@@ -402,6 +417,7 @@
 				5B3A5A712791744300781CDC /* LaunchScreen.storyboard in Resources */,
 				5B600A6A2791923400AD53DB /* MovieTableViewCell.xib in Resources */,
 				5B3A5A6E2791744200781CDC /* Assets.xcassets in Resources */,
+				5B600A7C2791D1AF00AD53DB /* APIKeys.plist in Resources */,
 				5B3A5A6C2791743D00781CDC /* Main.storyboard in Resources */,
 				5B600A6127918B0A00AD53DB /* MoviesListViewController.xib in Resources */,
 			);
@@ -532,14 +548,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BC03BA42791834900A64268 /* Movie.swift in Sources */,
+				5B600A852791E63400AD53DB /* NetworkManager.swift in Sources */,
 				5BC03B8127917BDA00A64268 /* Connectivity.swift in Sources */,
 				5B600A692791923400AD53DB /* MovieTableViewCell.swift in Sources */,
 				5BC03B8C27917C1400A64268 /* Extensions.swift in Sources */,
 				5B600A6F2791A3A400AD53DB /* Reusable.swift in Sources */,
 				5B3A5A692791743D00781CDC /* ViewController.swift in Sources */,
+				5B600A922792186400AD53DB /* MoviesNetworkManager.swift in Sources */,
+				5B600A8D2792150300AD53DB /* MoviesListViewModel.swift in Sources */,
 				5BC03B7C27917B7E00A64268 /* ImdbAPI.swift in Sources */,
 				5B3A5A652791743D00781CDC /* AppDelegate.swift in Sources */,
 				5BC03B8627917BE800A64268 /* NetworkError.swift in Sources */,
+				5B600A772791CF4400AD53DB /* APIKey.swift in Sources */,
 				5B600A6027918B0A00AD53DB /* MoviesListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

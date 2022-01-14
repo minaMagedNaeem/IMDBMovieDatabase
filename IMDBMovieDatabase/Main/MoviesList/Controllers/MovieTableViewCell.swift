@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieTableViewCell: UITableViewCell {
 
@@ -15,7 +16,24 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var addToFavouritesButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        movieImageView.kf.indicatorType = .activity
+    }
+    
+    var movie: Movie? {
+        didSet {
+            guard let movie = movie else { return }
+            self.bind(movie: movie)
+        }
+    }
+    
+    func bind(movie: Movie) {
+        if let posterPath = movie.posterPath, let imageUrl = URL(string: "https://image.tmdb.org/t/p/w92/\(posterPath)") {
+            movieImageView.kf.setImage(with: imageUrl)
+        }
+        
+        nameLabel.text = movie.originalTitle
+        descriptionLabel.text = movie.overview
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -23,6 +41,15 @@ class MovieTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
     @IBAction func addToFavouritesPressed(_ sender: Any) {
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.imageView?.image = nil
+        self.nameLabel.text = ""
+        self.descriptionLabel.text = ""
     }
 }

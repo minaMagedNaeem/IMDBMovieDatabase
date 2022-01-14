@@ -10,16 +10,16 @@ import Moya
 
 enum ImdbAPI : TargetType {
     
-    case getMovies
+    case getMovies(page: Int)
     
     public var baseURL: URL {
-        return URL.init(string: "https://raw.githubusercontent.com")!
+        return URL.init(string: "https://api.themoviedb.org/3")!
     }
     
     public var path: String {
         switch self {
         case .getMovies:
-            return "/EsraaAbdelmotteleb/DuetAPI/gh-pages/project.json"
+            return "/discover/movie"
         }
     }
     
@@ -36,8 +36,11 @@ enum ImdbAPI : TargetType {
     
     public var task: Task {
         switch self {
-        case .getMovies:
-            return .requestPlain
+        case .getMovies(let page):
+            return .requestParameters(parameters: ["api_key": TMDB.getAPIKey(),
+                                                   "page": page,
+                                                   "sort_by":"popularity.desc"],
+                                      encoding: URLEncoding.default)
         }
     }
     
@@ -51,21 +54,5 @@ enum ImdbAPI : TargetType {
     }
 }
 
-final class ErrorHandlerPlugin : PluginType {
-    
-    func willSend(_ request: RequestType, target: TargetType) {
-        
-    }
-    
-    func didReceive(_ result: Result<Moya.Response, MoyaError>, target: TargetType) {
-        
-        if !(Connectivity.isConnectedToInternet()) {
-            return
-        }
-        
-        UIApplication.topViewController()?.displayAlert(title: "Error", message: "Something wrong happened")
-    }
-}
-
-let imdbMoviesProvider = MoyaProvider<ImdbAPI>.init(plugins: [NetworkLoggerPlugin(configuration: NetworkLoggerPlugin.Configuration.init(logOptions: .verbose)), ErrorHandlerPlugin()])
+let imdbMoviesProvider = MoyaProvider<ImdbAPI>.init(plugins: [NetworkLoggerPlugin(configuration: NetworkLoggerPlugin.Configuration.init(logOptions: .verbose))])
 
