@@ -11,6 +11,7 @@ import UIScrollView_InfiniteScroll
 class MoviesListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    weak var favouritesButton: UIBarButtonItem!
     
     var viewModel: MoviesListViewModel?
     
@@ -25,10 +26,7 @@ class MoviesListViewController: UIViewController {
             self?.tableView.finishInfiniteScroll()
         })
         
-        self.view.startProgressAnim()
-        self.viewModel?.getMoviesLists(successCompletion: {[weak self] indices in
-            self?.updateTableView(indices: indices)
-        })
+        self.getMovies()
         
         self.tableView.addInfiniteScroll {[weak self] (tableView) -> Void in
             if (self?.viewModel?.canFetchMorePages ?? false) {
@@ -47,7 +45,9 @@ class MoviesListViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.title = "Movies"
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(filterTapped))
+        let favouritesButton = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(filterTapped))
+        self.navigationItem.rightBarButtonItem = favouritesButton
+        self.favouritesButton = favouritesButton
     }
     
     private func setupTableView() {
@@ -58,7 +58,7 @@ class MoviesListViewController: UIViewController {
     }
     
     private func updateTableView(indices: [Int]) {
-        var indexPaths: [IndexPath] = indices.map({return IndexPath(row: $0, section: 0)})
+        let indexPaths: [IndexPath] = indices.map({return IndexPath(row: $0, section: 0)})
         
         self.tableView.beginUpdates()
         self.tableView.insertRows(at: indexPaths, with: .automatic)
@@ -66,8 +66,29 @@ class MoviesListViewController: UIViewController {
         self.tableView.finishInfiniteScroll()
     }
     
+    private func getMovies() {
+        self.setFailureView(show: false)
+        self.view.startProgressAnim()
+        self.viewModel?.getMoviesLists(successCompletion: {[weak self] indices in
+            self?.updateTableView(indices: indices)
+        }, failureCompletion: { [weak self] in
+            self?.setFailureView(show: true)
+        })
+    }
+    
+    func setFailureView(show: Bool) {
+        
+        if show {
+            let fetchFailedView = FailureView.instanceFromNib()
+            fetchFailedView.completion = { [weak self] in self?.getMovies()}
+            self.tableView.backgroundView = fetchFailedView
+        } else {
+            self.tableView.backgroundView = nil
+        }
+    }
+    
     @objc func filterTapped(sender: UIBarButtonItem) {
-        // Function body goes here
+        
     }
 }
 

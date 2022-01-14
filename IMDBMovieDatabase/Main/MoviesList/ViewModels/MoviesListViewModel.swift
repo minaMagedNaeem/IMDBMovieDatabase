@@ -27,11 +27,17 @@ class MoviesListViewModel {
         self.networkManager = MoviesNetworkManager()
     }
     
-    func getMoviesLists(successCompletion: @escaping ([Int]) -> Void) {
+    func getMoviesLists(successCompletion: @escaping ([Int]) -> Void, failureCompletion: (() -> Void)? = nil) {
         
         guard self.canFetchMorePages else { return }
         
         self.networkManager?.getMovies(page: self.nextPageNumber!, completion: {[weak self] (error, movies) in
+            
+            if error != nil {
+                failureCompletion?()
+                return
+            }
+            
             self?.addMovies(movies: movies ?? [], successCompletion: successCompletion)
         })
     }

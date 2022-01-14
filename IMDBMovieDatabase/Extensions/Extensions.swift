@@ -168,7 +168,7 @@ extension UIView {
 }
 
 extension UITableView {
-    func registerReusableCell<T: UITableViewCell>(_: T.Type) where T: Reusable {
+    func registerReusableCell<T: UITableViewCell>(_: T.Type) {
         if let nib = T.nib {
             self.register(nib, forCellReuseIdentifier: T.reuseIdentifier)
         } else {
@@ -176,7 +176,7 @@ extension UITableView {
         }
     }
     
-    func dequeueReusableCell<T: UITableViewCell>(indexPath: IndexPath) -> T where T: Reusable {
+    func dequeueReusableCell<T: UITableViewCell>(indexPath: IndexPath) -> T {
         return self.dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as! T
     }
 }
