@@ -14,6 +14,11 @@
 		5B3A5A712791744300781CDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B3A5A6F2791744300781CDC /* LaunchScreen.storyboard */; };
 		5B3A5A7C2791744300781CDC /* IMDBMovieDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3A5A7B2791744300781CDC /* IMDBMovieDatabaseTests.swift */; };
 		5B3A5A872791744300781CDC /* IMDBMovieDatabaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3A5A862791744300781CDC /* IMDBMovieDatabaseUITests.swift */; };
+		5B600A6027918B0A00AD53DB /* MoviesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B600A5E27918B0A00AD53DB /* MoviesListViewController.swift */; };
+		5B600A6127918B0A00AD53DB /* MoviesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B600A5F27918B0A00AD53DB /* MoviesListViewController.xib */; };
+		5B600A692791923400AD53DB /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B600A672791923400AD53DB /* MovieTableViewCell.swift */; };
+		5B600A6A2791923400AD53DB /* MovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B600A682791923400AD53DB /* MovieTableViewCell.xib */; };
+		5B600A6F2791A3A400AD53DB /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B600A6E2791A3A400AD53DB /* Reusable.swift */; };
 		5BC03B7C27917B7E00A64268 /* ImdbAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03B7B27917B7E00A64268 /* ImdbAPI.swift */; };
 		5BC03B8127917BDA00A64268 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03B8027917BDA00A64268 /* Connectivity.swift */; };
 		5BC03B8627917BE800A64268 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03B8527917BE800A64268 /* NetworkError.swift */; };
@@ -58,6 +63,11 @@
 		5B3A5A822791744300781CDC /* IMDBMovieDatabaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IMDBMovieDatabaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B3A5A862791744300781CDC /* IMDBMovieDatabaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMDBMovieDatabaseUITests.swift; sourceTree = "<group>"; };
 		5B3A5A882791744300781CDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B600A5E27918B0A00AD53DB /* MoviesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MoviesListViewController.swift; path = IMDBMovieDatabase/Main/MoviesList/Controllers/MoviesListViewController.swift; sourceTree = SOURCE_ROOT; };
+		5B600A5F27918B0A00AD53DB /* MoviesListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MoviesListViewController.xib; path = IMDBMovieDatabase/Main/MoviesList/Controllers/MoviesListViewController.xib; sourceTree = SOURCE_ROOT; };
+		5B600A672791923400AD53DB /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
+		5B600A682791923400AD53DB /* MovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieTableViewCell.xib; sourceTree = "<group>"; };
+		5B600A6E2791A3A400AD53DB /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		5BC03B7B27917B7E00A64268 /* ImdbAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImdbAPI.swift; sourceTree = "<group>"; };
 		5BC03B8027917BDA00A64268 /* Connectivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		5BC03B8527917BE800A64268 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -124,6 +134,7 @@
 		5B3A5A632791743D00781CDC /* IMDBMovieDatabase */ = {
 			isa = PBXGroup;
 			children = (
+				5B600A5927918A5200AD53DB /* Main */,
 				5BC03B8A27917BFD00A64268 /* Extensions */,
 				5BC03B7927917B2D00A64268 /* Common */,
 				5BC03B7827917AFC00A64268 /* Application */,
@@ -152,6 +163,57 @@
 				5B3A5A882791744300781CDC /* Info.plist */,
 			);
 			path = IMDBMovieDatabaseUITests;
+			sourceTree = "<group>";
+		};
+		5B600A5927918A5200AD53DB /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				5B600A5A27918A5B00AD53DB /* MoviesList */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		5B600A5A27918A5B00AD53DB /* MoviesList */ = {
+			isa = PBXGroup;
+			children = (
+				5B600A5D27918AE300AD53DB /* ViewModels */,
+				5B600A5C27918AD800AD53DB /* Controllers */,
+				5B600A5B27918ACA00AD53DB /* Views */,
+			);
+			path = MoviesList;
+			sourceTree = "<group>";
+		};
+		5B600A5B27918ACA00AD53DB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5B600A652791920D00AD53DB /* cell */,
+				5B600A5F27918B0A00AD53DB /* MoviesListViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5B600A5C27918AD800AD53DB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5B600A672791923400AD53DB /* MovieTableViewCell.swift */,
+				5B600A5E27918B0A00AD53DB /* MoviesListViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5B600A5D27918AE300AD53DB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5B600A652791920D00AD53DB /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				5B600A682791923400AD53DB /* MovieTableViewCell.xib */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 		5BC03B7727917AEC00A64268 /* Config */ = {
@@ -193,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				5BC03B8B27917C1400A64268 /* Extensions.swift */,
+				5B600A6E2791A3A400AD53DB /* Reusable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -337,8 +400,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B3A5A712791744300781CDC /* LaunchScreen.storyboard in Resources */,
+				5B600A6A2791923400AD53DB /* MovieTableViewCell.xib in Resources */,
 				5B3A5A6E2791744200781CDC /* Assets.xcassets in Resources */,
 				5B3A5A6C2791743D00781CDC /* Main.storyboard in Resources */,
+				5B600A6127918B0A00AD53DB /* MoviesListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,11 +533,14 @@
 			files = (
 				5BC03BA42791834900A64268 /* Movie.swift in Sources */,
 				5BC03B8127917BDA00A64268 /* Connectivity.swift in Sources */,
+				5B600A692791923400AD53DB /* MovieTableViewCell.swift in Sources */,
 				5BC03B8C27917C1400A64268 /* Extensions.swift in Sources */,
+				5B600A6F2791A3A400AD53DB /* Reusable.swift in Sources */,
 				5B3A5A692791743D00781CDC /* ViewController.swift in Sources */,
 				5BC03B7C27917B7E00A64268 /* ImdbAPI.swift in Sources */,
 				5B3A5A652791743D00781CDC /* AppDelegate.swift in Sources */,
 				5BC03B8627917BE800A64268 /* NetworkError.swift in Sources */,
+				5B600A6027918B0A00AD53DB /* MoviesListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
