@@ -67,5 +67,5 @@ final class ErrorHandlerPlugin : PluginType {
     }
 }
 
-let starWarsProvider = MoyaProvider<StarWarsAPI>.init(plugins: [NetworkLoggerPlugin(configuration: NetworkLoggerPlugin.Configuration.init(logOptions: .verbose)), ErrorHandlerPlugin()])
+let imdbMoviesProvider = MoyaProvider<ImdbAPI>.init(plugins: [NetworkLoggerPlugin(configuration: NetworkLoggerPlugin.Configuration.init(logOptions: .verbose)), ErrorHandlerPlugin()])
 

@@ -18,6 +18,7 @@
 		5BC03B8127917BDA00A64268 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03B8027917BDA00A64268 /* Connectivity.swift */; };
 		5BC03B8627917BE800A64268 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03B8527917BE800A64268 /* NetworkError.swift */; };
 		5BC03B8C27917C1400A64268 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03B8B27917C1400A64268 /* Extensions.swift */; };
+		5BC03BA42791834900A64268 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03BA32791834900A64268 /* Movie.swift */; };
 		6A547D9CE0C35065E18183AD /* Pods_IMDBMovieDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD41EF7D87C822ABF8ADCE02 /* Pods_IMDBMovieDatabase.framework */; };
 		9452DE1382D02E81D71365A2 /* Pods_IMDBMovieDatabase_IMDBMovieDatabaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F2809DC593A0984411E7BE /* Pods_IMDBMovieDatabase_IMDBMovieDatabaseUITests.framework */; };
 		B4A6079B00B07384FFCE0E85 /* Pods_IMDBMovieDatabaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1CF8F6308BA8DA20751F29 /* Pods_IMDBMovieDatabaseTests.framework */; };
@@ -61,6 +62,7 @@
 		5BC03B8027917BDA00A64268 /* Connectivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		5BC03B8527917BE800A64268 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		5BC03B8B27917C1400A64268 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		5BC03BA32791834900A64268 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		6CCDCD907D50509FF58DC6F2 /* Pods-IMDBMovieDatabase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMDBMovieDatabase.release.xcconfig"; path = "Target Support Files/Pods-IMDBMovieDatabase/Pods-IMDBMovieDatabase.release.xcconfig"; sourceTree = "<group>"; };
 		9E9CB4AADF59DF6128ACDEA0 /* Pods-IMDBMovieDatabase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMDBMovieDatabase.debug.xcconfig"; path = "Target Support Files/Pods-IMDBMovieDatabase/Pods-IMDBMovieDatabase.debug.xcconfig"; sourceTree = "<group>"; };
 		CE1CF8F6308BA8DA20751F29 /* Pods_IMDBMovieDatabaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMDBMovieDatabaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +173,7 @@
 		5BC03B7927917B2D00A64268 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5BC03BA22791833200A64268 /* Models */,
 				5BC03B7A27917B6300A64268 /* NetworkLayer */,
 			);
 			path = Common;
@@ -192,6 +195,14 @@
 				5BC03B8B27917C1400A64268 /* Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5BC03BA22791833200A64268 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5BC03BA32791834900A64268 /* Movie.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		9491A0523E5CFBC3A3987002 /* Frameworks */ = {
@@ -455,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BC03BA42791834900A64268 /* Movie.swift in Sources */,
 				5BC03B8127917BDA00A64268 /* Connectivity.swift in Sources */,
 				5BC03B8C27917C1400A64268 /* Extensions.swift in Sources */,
 				5B3A5A692791743D00781CDC /* ViewController.swift in Sources */,
@@ -639,7 +651,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D4B6JH96D6;
-				INFOPLIST_FILE = IMDBMovieDatabase/Info.plist;
+				INFOPLIST_FILE = IMDBMovieDatabase/Config/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -659,7 +671,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D4B6JH96D6;
-				INFOPLIST_FILE = IMDBMovieDatabase/Info.plist;
+				INFOPLIST_FILE = IMDBMovieDatabase/Config/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
