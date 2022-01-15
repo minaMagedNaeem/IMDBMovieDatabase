@@ -121,5 +121,14 @@ extension MoviesListViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        
+        let vc: MovieDetailsViewController = .instantiateFromNib()
+        
+        vc.movie = self.viewModel?.shownMoviesList[indexPath.row]
+        
+        self.show(vc, sender: self)
+    }
     
 }

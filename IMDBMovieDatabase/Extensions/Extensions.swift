@@ -52,6 +52,10 @@ func isRunningUnitTests() -> Bool {
 @IBDesignable
 extension UIView {
     
+    class func fromNib<T: UIView>() -> T {
+            return Bundle(for: T.self).loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
+    }
+    
     func startProgressAnim() {
         let activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50), type: .circleStrokeSpin)
         activityIndicatorView.color = .systemOrange
@@ -178,5 +182,15 @@ extension UITableView {
     
     func dequeueReusableCell<T: UITableViewCell>(indexPath: IndexPath) -> T {
         return self.dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as! T
+    }
+}
+
+extension UIViewController {
+    static func instantiateFromNib() -> Self {
+        func instantiateFromNib<T: UIViewController>(_ viewType: T.Type) -> T {
+            return T.init(nibName: String(describing: T.self), bundle: nil)
+        }
+
+        return instantiateFromNib(self)
     }
 }

@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.5.0)
+  - Cosmos (23.0.0)
   - IQKeyboardManager (6.5.9)
   - Kingfisher (7.1.2)
   - Moya (15.0.0):
@@ -17,6 +18,7 @@ PODS:
   - UIScrollView-InfiniteScroll (1.1.0)
 
 DEPENDENCIES:
+  - Cosmos (~> 23.0)
   - IQKeyboardManager
   - Kingfisher (~> 7.0)
   - Moya
@@ -27,6 +29,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Cosmos
     - IQKeyboardManager
     - Kingfisher
     - Moya
@@ -37,6 +40,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   IQKeyboardManager: 241cc94ccabc9deb8f8bd7d12f00d73288d13ecc
   Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
@@ -45,6 +49,6 @@ SPEC CHECKSUMS:
   RealmSwift: dbf9a4eb06e0c929d51c4ef2e8f951bca541feab
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
 
-PODFILE CHECKSUM: 1e3efc343e12d1162165a3d6c0804bcef1fa5054
+PODFILE CHECKSUM: 9217dd9a6fbe350ac45b7edeb29923509b7f94f3
 
 COCOAPODS: 1.11.2
