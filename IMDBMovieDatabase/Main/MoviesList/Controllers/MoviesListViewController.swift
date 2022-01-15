@@ -12,6 +12,7 @@ class MoviesListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     weak var favouritesButton: UIBarButtonItem!
+    let refreshControl = UIRefreshControl()
     
     var viewModel: MoviesListViewModel?
     
@@ -20,8 +21,10 @@ class MoviesListViewController: UIViewController {
         
         self.viewModel = MoviesListViewModel(onListRetrieval: { [weak self] in
             self?.view.stopProgressAnim()
+            self?.refreshControl.endRefreshing()
             self?.tableView.finishInfiniteScroll()
             self?.tableView.reloadData()
+            self?.favouritesButton.title = self?.getFilterButtonTitle()
         })
         
         self.setupNavbar()
@@ -57,6 +60,9 @@ class MoviesListViewController: UIViewController {
         tableView.delegate = self
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+        
         self.tableView.addInfiniteScroll {[weak self] (tableView) -> Void in
             if (self?.viewModel?.canFetchMorePages ?? false) {
                 self?.viewModel?.getMoviesLists()
@@ -66,11 +72,15 @@ class MoviesListViewController: UIViewController {
         }
     }
     
+    @objc func refresh(_ sender: AnyObject) {
+        self.startGettingMovies()
+    }
+    
     private func startGettingMovies() {
         self.favouritesButton.isEnabled = false
         self.setFailureView(show: false)
         self.view.startProgressAnim()
-        self.viewModel?.getMoviesLists(successCompletion: {[weak self] in
+        self.viewModel?.getMoviesLists(firstRun: true, successCompletion: {[weak self] in
             self?.favouritesButton.isEnabled = true
         }, failureCompletion: { [weak self] in
             self?.setFailureView(show: true)

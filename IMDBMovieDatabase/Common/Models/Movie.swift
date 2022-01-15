@@ -16,6 +16,10 @@ class StorableMovie: Object {
     @Persisted var overview: String = ""
     @Persisted var favourite: Bool = false
     
+    var domainMovie: Movie {
+        return Movie(id: id, posterPath: posterPath, overview: overview, originalTitle: originalTitle, voteAverage: voteAverage)
+    }
+    
     init(id: Int,
          originalTitle: String,
          posterPath: String?,
@@ -64,7 +68,7 @@ class Movie: Codable {
         self.voteAverage = voteAverage
     }
     
-    func getStorable() -> StorableMovie {
+    var storableMovie: StorableMovie {
         return StorableMovie.init(id: id,
                                   originalTitle: originalTitle,
                                   posterPath: posterPath,

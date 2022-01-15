@@ -23,6 +23,8 @@ class MoviesListViewModel {
     
     var networkManager: NetworkManager?
     
+    var moviesRepo: MoviesRepo?
+    
     private var currentDisplayedMoviesFilter: MoviesType = .all {
         didSet {
             switch currentDisplayedMoviesFilter {
@@ -34,6 +36,8 @@ class MoviesListViewModel {
         }
     }
     
+    private var currentDataRetrievalMethod: DataRetrievalMethod = .online
+    
     var isShowingFavourites: Bool {
         return currentDisplayedMoviesFilter == .favourites
     }
@@ -42,27 +46,46 @@ class MoviesListViewModel {
         self.onListRetrieval = onListRetrieval
         
         self.networkManager = MoviesNetworkManager()
+        
+        self.moviesRepo = MoviesRepo()
     }
     
-    func getMoviesLists(successCompletion: (() -> Void)? = nil, failureCompletion: (() -> Void)? = nil) {
+    func getMoviesLists(firstRun: Bool = false, successCompletion: (() -> Void)? = nil, failureCompletion: (() -> Void)? = nil) {
+        
+        if firstRun {
+            self.reset()
+        }
         
         guard self.canFetchMorePages else { return }
         
-        self.networkManager?.getMovies(page: self.nextPageNumber!, completion: {[weak self] (error, movies) in
+        if Connectivity.isConnectedToInternet() {
+            self.networkManager?.getMovies(page: self.nextPageNumber!, completion: {[weak self] (error, movies) in
+                
+                if error != nil {
+                    failureCompletion?()
+                    return
+                }
+                
+                self?.addMovies(movies: movies ?? [])
+                successCompletion?()
+            })
+        } else {
+            self.nextPageNumber = nil
+            self.currentDataRetrievalMethod = .offline
             
-            if error != nil {
-                failureCompletion?()
-                return
-            }
+            let movies = moviesRepo?.getMovies() ?? []
             
-            self?.addMovies(movies: movies ?? [])
-            successCompletion?()
-        })
+            self.allMoviesList = movies
+            self.shownMoviesList = allMoviesList
+        }
     }
     
     var canFetchMorePages: Bool {
         // 500 is the max page number the api is allowed to take
-        if let page = self.nextPageNumber, (page >= 1 && page <= 500), self.currentDisplayedMoviesFilter == .all {
+        if let page = self.nextPageNumber,
+           (page >= 1 && page <= 500),
+           self.currentDisplayedMoviesFilter == .all,
+           self.currentDataRetrievalMethod == .online {
             return true
         }
         return false
@@ -74,6 +97,16 @@ class MoviesListViewModel {
         self.allMoviesList.append(contentsOf: movies)
         
         self.shownMoviesList = allMoviesList
+        
+        self.moviesRepo?.storeMovies(movies: movies)
+    }
+    
+    private func reset() {
+        self.allMoviesList = []
+        self.shownMoviesList = []
+        self.currentDisplayedMoviesFilter = .all
+        self.nextPageNumber = 1
+        self.currentDataRetrievalMethod = .online
     }
     
     func toggleFavourites() {
@@ -90,5 +123,10 @@ class MoviesListViewModel {
     enum MoviesType {
         case all
         case favourites
+    }
+    
+    enum DataRetrievalMethod {
+        case online
+        case offline
     }
 }
