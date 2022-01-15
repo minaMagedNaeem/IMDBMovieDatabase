@@ -17,7 +17,7 @@ class StorableMovie: Object {
     @Persisted var favourite: Bool = false
     
     var domainMovie: Movie {
-        return Movie(id: id, posterPath: posterPath, overview: overview, originalTitle: originalTitle, voteAverage: voteAverage)
+        return Movie(id: id, posterPath: posterPath, overview: overview, originalTitle: originalTitle, voteAverage: voteAverage, favourite: favourite)
     }
     
     init(id: Int,
@@ -60,12 +60,14 @@ class Movie: Codable {
          posterPath: String?,
          overview: String,
          originalTitle: String,
-         voteAverage: Double) {
+         voteAverage: Double,
+         favourite: Bool) {
         self.posterPath = posterPath
         self.overview = overview
         self.id = id
         self.originalTitle = originalTitle
         self.voteAverage = voteAverage
+        self.favourite = favourite
     }
     
     var storableMovie: StorableMovie {

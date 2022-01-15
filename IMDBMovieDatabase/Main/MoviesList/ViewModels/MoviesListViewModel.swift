@@ -116,6 +116,7 @@ class MoviesListViewModel {
     func toggleMovieFavourite(for movieId: Int, completion: @escaping ((Int) -> Void)) {
         for (index, movie) in self.shownMoviesList.enumerated() where movie.id == movieId {
             movie.favourite = !movie.favourite
+            self.moviesRepo?.updateMovie(movie: movie)
             completion(index)
         }
     }
