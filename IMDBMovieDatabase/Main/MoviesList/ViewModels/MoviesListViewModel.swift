@@ -11,7 +11,9 @@ class MoviesListViewModel {
     
     var onListRetrieval: (() -> Void)?
     
-    var moviesList: [Movie] = [] {
+    private var allMoviesList: [Movie] = []
+    
+    var shownMoviesList: [Movie] = []  {
         didSet {
             onListRetrieval?()
         }
@@ -21,13 +23,28 @@ class MoviesListViewModel {
     
     var networkManager: NetworkManager?
     
+    private var currentDisplayedMoviesFilter: MoviesType = .all {
+        didSet {
+            switch currentDisplayedMoviesFilter {
+            case .all:
+                self.shownMoviesList = allMoviesList
+            case .favourites:
+                self.shownMoviesList = allMoviesList.filter({ $0.favourite })
+            }
+        }
+    }
+    
+    var isShowingFavourites: Bool {
+        return currentDisplayedMoviesFilter == .favourites
+    }
+    
     init (onListRetrieval: @escaping (() -> Void)) {
         self.onListRetrieval = onListRetrieval
         
         self.networkManager = MoviesNetworkManager()
     }
     
-    func getMoviesLists(successCompletion: @escaping ([Int]) -> Void, failureCompletion: (() -> Void)? = nil) {
+    func getMoviesLists(successCompletion: (() -> Void)? = nil, failureCompletion: (() -> Void)? = nil) {
         
         guard self.canFetchMorePages else { return }
         
@@ -38,36 +55,40 @@ class MoviesListViewModel {
                 return
             }
             
-            self?.addMovies(movies: movies ?? [], successCompletion: successCompletion)
+            self?.addMovies(movies: movies ?? [])
+            successCompletion?()
         })
     }
     
     var canFetchMorePages: Bool {
         // 500 is the max page number the api is allowed to take
-        if let page = self.nextPageNumber, (page >= 1 && page <= 500) {
+        if let page = self.nextPageNumber, (page >= 1 && page <= 500), self.currentDisplayedMoviesFilter == .all {
             return true
         }
         return false
     }
     
-    private func addMovies(movies: [Movie], successCompletion: @escaping ([Int]) -> Void) {
+    private func addMovies(movies: [Movie]) {
         self.nextPageNumber = movies.isEmpty ? nil : (self.nextPageNumber ?? 1) + 1
+
+        self.allMoviesList.append(contentsOf: movies)
         
-        var updatedMoviesIndexes: [Int] = []
-        
-        var lastIndex = self.moviesList.count
-        
-        for movie in movies {
-            self.moviesList.append(movie)
-            updatedMoviesIndexes.append(lastIndex)
-            lastIndex = lastIndex + 1
+        self.shownMoviesList = allMoviesList
+    }
+    
+    func toggleFavourites() {
+        self.currentDisplayedMoviesFilter = self.currentDisplayedMoviesFilter == .all ? .favourites : .all
+    }
+    
+    func toggleMovieFavourite(for movieId: Int, completion: @escaping ((Int) -> Void)) {
+        for (index, movie) in self.shownMoviesList.enumerated() where movie.id == movieId {
+            movie.favourite = !movie.favourite
+            completion(index)
         }
-        
-        successCompletion(updatedMoviesIndexes)
     }
     
-    func changeFavouriteStatus(for movieId: Int, isFavourite: Bool) {
-        
+    enum MoviesType {
+        case all
+        case favourites
     }
-    
 }
