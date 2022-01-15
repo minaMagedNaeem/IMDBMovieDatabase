@@ -77,6 +77,7 @@ class MoviesListViewModel {
             
             self.allMoviesList = movies
             self.shownMoviesList = allMoviesList
+            successCompletion?()
         }
     }
     
