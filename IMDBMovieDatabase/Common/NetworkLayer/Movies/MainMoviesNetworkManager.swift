@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MoviesNetworkManager: NetworkManager {
+class MainMoviesNetworkManager: MoviesNetworkManager {
     func getMovies(page: Int, completion: @escaping ((NetworkError?, [Movie]?) -> Void)) {
         if !Connectivity.isConnectedToInternet() {
             completion(.noInternet, nil)

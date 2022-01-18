@@ -9,9 +9,8 @@ import Foundation
 
 class MoviesListViewModel {
     
+    // MARK: - Global Variables
     var onListRetrieval: (() -> Void)?
-    
-    private var allMoviesList: [Movie] = []
     
     var shownMoviesList: [Movie] = []  {
         didSet {
@@ -19,11 +18,33 @@ class MoviesListViewModel {
         }
     }
     
+    var moviesCount: Int {
+        return shownMoviesList.count
+    }
+    
     var nextPageNumber : Int? = 1
     
-    var networkManager: NetworkManager?
+    var networkManager: MoviesNetworkManager?
     
     var moviesRepo: MoviesRepo?
+    
+    var isShowingFavourites: Bool {
+        return currentDisplayedMoviesFilter == .favourites
+    }
+    
+    var canFetchMorePages: Bool {
+        // 500 is the max page number the api is allowed to take
+        if let page = self.nextPageNumber,
+           (page >= 1 && page <= 500),
+           self.currentDisplayedMoviesFilter == .all,
+           self.currentDataRetrievalMethod == .online {
+            return true
+        }
+        return false
+    }
+    
+    // MARK: - Private Variables
+    private var allMoviesList: [Movie] = []
     
     private var currentDisplayedMoviesFilter: MoviesType = .all {
         didSet {
@@ -38,20 +59,14 @@ class MoviesListViewModel {
     
     private var currentDataRetrievalMethod: DataRetrievalMethod = .online
     
-    var isShowingFavourites: Bool {
-        return currentDisplayedMoviesFilter == .favourites
+    init(networkManager: MoviesNetworkManager, repo: MoviesRepo) {
+        self.networkManager = networkManager
+        
+        self.moviesRepo = repo
     }
     
-    init (onListRetrieval: @escaping (() -> Void)) {
-        self.onListRetrieval = onListRetrieval
-        
-        self.networkManager = MoviesNetworkManager()
-        
-        self.moviesRepo = MoviesRepo()
-    }
-    
+    // MARK: - Public Methods
     func getMoviesLists(firstRun: Bool = false, successCompletion: (() -> Void)? = nil, failureCompletion: (() -> Void)? = nil) {
-        
         if firstRun {
             self.reset()
         }
@@ -81,17 +96,23 @@ class MoviesListViewModel {
         }
     }
     
-    var canFetchMorePages: Bool {
-        // 500 is the max page number the api is allowed to take
-        if let page = self.nextPageNumber,
-           (page >= 1 && page <= 500),
-           self.currentDisplayedMoviesFilter == .all,
-           self.currentDataRetrievalMethod == .online {
-            return true
-        }
-        return false
+    func toggleFavourites() {
+        self.currentDisplayedMoviesFilter = self.currentDisplayedMoviesFilter == .all ? .favourites : .all
     }
     
+    func toggleMovieFavourite(for movieId: Int, completion: @escaping ((Int) -> Void)) {
+        for (index, movie) in self.shownMoviesList.enumerated() where movie.id == movieId {
+            movie.favourite = !movie.favourite
+            self.moviesRepo?.updateMovie(movie: movie)
+            completion(index)
+        }
+    }
+    
+    func movie(for index: Int) -> Movie {
+        return self.shownMoviesList[index]
+    }
+    
+    // MARK: - Private Methods
     private func addMovies(movies: [Movie]) {
         self.nextPageNumber = movies.isEmpty ? nil : (self.nextPageNumber ?? 1) + 1
 
@@ -110,18 +131,7 @@ class MoviesListViewModel {
         self.currentDataRetrievalMethod = .online
     }
     
-    func toggleFavourites() {
-        self.currentDisplayedMoviesFilter = self.currentDisplayedMoviesFilter == .all ? .favourites : .all
-    }
-    
-    func toggleMovieFavourite(for movieId: Int, completion: @escaping ((Int) -> Void)) {
-        for (index, movie) in self.shownMoviesList.enumerated() where movie.id == movieId {
-            movie.favourite = !movie.favourite
-            self.moviesRepo?.updateMovie(movie: movie)
-            completion(index)
-        }
-    }
-    
+    // MARK: - Enums
     enum MoviesType {
         case all
         case favourites
