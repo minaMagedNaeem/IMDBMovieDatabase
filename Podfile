@@ -11,6 +11,9 @@ target 'IMDBMovieDatabase' do
   pod 'Kingfisher', '~> 7.0'
   pod 'NVActivityIndicatorView'
   pod 'UIScrollView-InfiniteScroll', '~> 1.1.0'
+  pod 'RealmSwift', '~>10'
+  pod 'Cosmos', '~> 23.0'
+  pod 'Toaster'
   
   target 'IMDBMovieDatabaseTests' do
     inherit! :search_paths
