@@ -8,7 +8,7 @@
 import Foundation
 
 class MoviesNetworkManagerFactory {
-    class func getNetworkManager(isTesting: Bool = false) -> MoviesNetworkManager {
+    class func getNetworkManager() -> MoviesNetworkManager {
         //if isTesting {
             
         //} else {

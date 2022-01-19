@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navController = UINavigationController.init()
         
-        coordinator = CoordinatorFactory.getCoordinator(window: window, rootViewController: navController, isTesting: false)
+        coordinator = CoordinatorFactory.getCoordinator(window: window, rootViewController: navController)
         
         coordinator?.start()
         

@@ -8,11 +8,7 @@
 import Foundation
 
 class MoviesRepoFactory {
-    class func getRepo(isTesting: Bool = false) -> MoviesRepo {
-        //if isTesting {
-            
-        //} else {
-            return MainMoviesRepo()
-        //}
+    class func getRepo() -> MoviesRepo {
+        return MainMoviesRepo()
     }
 }
