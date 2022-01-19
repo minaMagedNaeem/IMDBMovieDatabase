@@ -21,13 +21,13 @@ class MainCoordinator: Coordinator {
     func start() {
         rootViewController.navigationBar.prefersLargeTitles = true
         
-        rootViewController.viewControllers = [MoviesListFactory.getViewController(coordinator: self, isTesting: false)]
+        rootViewController.viewControllers = [MoviesListFactory.getViewController(coordinator: self)]
         
         window?.rootViewController = rootViewController
     }
     
     func showDetails(of movie: Movie) {
-        rootViewController.pushViewController(MovieDetailsFactory.getViewController(coordinator: self, movie: movie, isTesting: false), animated: true)
+        rootViewController.pushViewController(MovieDetailsFactory.getViewController(coordinator: self, movie: movie), animated: true)
     }
     
     

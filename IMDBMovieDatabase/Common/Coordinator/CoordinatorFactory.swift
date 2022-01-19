@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class CoordinatorFactory {
-    class func getCoordinator(window: UIWindow?, rootViewController: UINavigationController, isTesting: Bool = false) -> Coordinator {
+    class func getCoordinator(window: UIWindow?, rootViewController: UINavigationController) -> Coordinator {
         return MainCoordinator(window: window, rootViewController: rootViewController)
     }
 }

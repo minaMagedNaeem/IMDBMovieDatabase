@@ -8,9 +8,9 @@
 import Foundation
 
 class MoviesListFactory {
-    class func getViewController(coordinator: Coordinator, isTesting: Bool = false) -> MoviesListViewController {
+    class func getViewController(coordinator: Coordinator) -> MoviesListViewController {
         return MoviesListViewController(coordinator: coordinator,
-                                        viewModel: MoviesListViewModel(networkManager: MoviesNetworkManagerFactory.getNetworkManager(isTesting: isTesting),
-                                                                       repo: MoviesRepoFactory.getRepo(isTesting: isTesting)))
+                                        viewModel: MoviesListViewModel(networkManager: MoviesNetworkManagerFactory.getNetworkManager(),
+                                                                       repo: MoviesRepoFactory.getRepo()))
     }
 }

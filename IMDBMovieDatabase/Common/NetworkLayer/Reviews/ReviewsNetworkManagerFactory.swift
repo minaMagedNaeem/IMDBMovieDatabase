@@ -8,7 +8,7 @@
 import Foundation
 
 class ReviewsNetworkManagerFactory {
-    class func getNetworkManager(isTesting: Bool) -> ReviewsNetworkManager {
+    class func getNetworkManager() -> ReviewsNetworkManager {
         //if isTesting {
             
         //} else {

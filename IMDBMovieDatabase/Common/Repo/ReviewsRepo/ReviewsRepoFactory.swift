@@ -8,11 +8,7 @@
 import Foundation
 
 class ReviewsRepoFactory {
-    class func getRepo(isTesting: Bool = false) -> ReviewsRepo {
-        //if isTesting {
-            
-        //} else {
-            return MainReviewsRepo()
-        //}
+    class func getRepo() -> ReviewsRepo {
+        return MainReviewsRepo()
     }
 }
